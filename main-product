@@ -1,0 +1,148 @@
+<div class="nws-modal-popup">
+  <svg
+    display="none"
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    xmlns:xlink="http://www.w3.org/1999/xlink"
+    width="768"
+    height="800"
+    viewBox="0 0 768 800"
+  >
+    <defs><g id="icon-close"><path class="path1" d="M31.708 25.708c-0-0-0-0-0-0l-9.708-9.708 9.708-9.708c0-0 0-0 0-0 0.105-0.105 0.18-0.227 0.229-0.357 0.133-0.356 0.057-0.771-0.229-1.057l-4.586-4.586c-0.286-0.286-0.702-0.361-1.057-0.229-0.13 0.048-0.252 0.124-0.357 0.228 0 0-0 0-0 0l-9.708 9.708-9.708-9.708c-0-0-0-0-0-0-0.105-0.104-0.227-0.18-0.357-0.228-0.356-0.133-0.771-0.057-1.057 0.229l-4.586 4.586c-0.286 0.286-0.361 0.702-0.229 1.057 0.049 0.13 0.124 0.252 0.229 0.357 0 0 0 0 0 0l9.708 9.708-9.708 9.708c-0 0-0 0-0 0-0.104 0.105-0.18 0.227-0.229 0.357-0.133 0.355-0.057 0.771 0.229 1.057l4.586 4.586c0.286 0.286 0.702 0.361 1.057 0.229 0.13-0.049 0.252-0.124 0.357-0.229 0-0 0-0 0-0l9.708-9.708 9.708 9.708c0 0 0 0 0 0 0.105 0.105 0.227 0.18 0.357 0.229 0.356 0.133 0.771 0.057 1.057-0.229l4.586-4.586c0.286-0.286 0.362-0.702 0.229-1.057-0.049-0.13-0.124-0.252-0.229-0.357z"></path></g></defs>
+  </svg>
+  <div class="nws-modal">
+    <div class="nws-modal-overlay nws-modal-toggle"></div>
+    <div class="nws-modal-wrapper modal-transition">
+      <div class="modal-header">
+        <button class="modal-close nws-modal-toggle nws-close">
+          <svg
+            class="desktop-icon nws-icon-close nws-icon"
+            viewBox="-4 -4 22 22"
+            version="1.1"
+            xmlns="http://www.w3.org/2000/svg"
+            xmlns:xlink="http://www.w3.org/1999/xlink"
+          >
+            <g stroke-width="1">
+              <polygon points="13.125 0 14.4508252 1.32582521 1.32582521 14.4508252 0 13.125"></polygon>
+              <polygon points="14.4508252 13.125 13.125 14.4508252 0 1.32582521 1.32582521 0"></polygon>
+            </g>
+          </svg>
+        </button>
+      </div>
+
+      <div class="modal-body">
+        <div class="modal-content">
+          <div class="nws-modal-top-content">
+            {% if section.settings['add-dis'] != blank %}
+              <div class="card__badge top left">
+                <span
+                  id="NoMediaStandardBadge-template--20074237722973__product-grid-8724715536733"
+                  class="badge badge--bottom-left color-accent-2"
+                >
+                  Save {{ section.settings['add-dis'] }}
+                </span>
+              </div>
+            {% endif %}
+            {% if section.settings['add-head'] %}
+              <h3>{{ section.settings['add-head'] }}</h3>
+            {% endif %}
+            {% if section.settings['add-desc'] %}
+              <p>{{ section.settings['add-desc'] }}</p>
+            {% endif %}
+            {% if section.settings['add-img'] %}
+              <img loading="lazy" src="{{ section.settings.add-img | img_url : '' }}">
+            {% endif %}
+          </div>
+          <div class="nws-desk-content">
+            {% assign prd = section.settings['add-prd'] %}
+            <div class="product-set-wrapper">
+              <div class="product-set-wrapper-inner">
+                <div class="product-set-img">
+                  <img loading="lazy" src="{{ prd | img_url: '' }}" alt="{{ prd.title }}">
+                </div>
+                <div class="product-set-content">
+                  <a class="set-product-title-anchor" href="{{ prd.url }}">
+                    <span class="set-product-title">{{ prd.title }}</span>
+                  </a>
+                  <p class="desc-pd">{{ prd.description | strip_html | truncatewords: 10, '' }}</p>
+                  <div class="product-set-price">
+                    {% if prd.selected_or_first_available_selling_plan_allocation %}
+                      <div class="prd-selling-price">
+                        <p class="regular-price">
+                          {{ prd.selected_or_first_available_selling_plan_allocation.price | money }}
+                        </p>
+                        <p class="original-price" style="text-decoration: line-through; font-size: 14px; ">
+                          {{ prd.price | money }}
+                        </p>
+                      </div>
+                    {% else %}
+                      {% if prd.compare_at_price > prd.price %}
+                        <p class="discounted-price">{{ prd.price | money }}</p>
+                        <p class="original-price">{{ prd.compare_at_price | money }}</p>
+                      {% else %}
+                        <p class="regular-price">{{ prd.price | money }}</p>
+                      {% endif %}
+                    {% endif %}
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="add-ons-added">
+              <span>
+                <svg width="15" height="15" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M21.5 10.0799C21.5 9.80372 21.2761 9.57986 21 9.57986C20.7239 9.57986 20.5 9.80372 20.5 10.0799H21.5ZM21 10.9999L21.5 11.0002V10.9999H21ZM14.8665 2.31658C15.1187 2.42897 15.4143 2.3156 15.5267 2.06336C15.6391 1.81113 15.5257 1.51554 15.2735 1.40315L14.8665 2.31658ZM21.3537 3.35324C21.5489 3.15788 21.5487 2.8413 21.3534 2.64613C21.158 2.45097 20.8414 2.45113 20.6463 2.64649L21.3537 3.35324ZM11 13.0099L10.6465 13.3634C10.7403 13.4572 10.8675 13.5099 11.0001 13.5099C11.1328 13.5098 11.26 13.4571 11.3537 13.3632L11 13.0099ZM8.35356 9.65631C8.1583 9.46105 7.84171 9.46105 7.64645 9.65631C7.45119 9.85157 7.45119 10.1682 7.64645 10.3634L8.35356 9.65631ZM20.5 10.0799V10.9999H21.5V10.0799H20.5ZM20.5 10.9996C20.4988 13.0482 19.8355 15.0415 18.6089 16.6823L19.4098 17.2811C20.7655 15.4676 21.4987 13.2644 21.5 11.0002L20.5 10.9996ZM18.6089 16.6823C17.3823 18.3231 15.6581 19.5234 13.6936 20.1043L13.9771 21.0632C16.1484 20.4213 18.0541 19.0946 19.4098 17.2811L18.6089 16.6823ZM13.6936 20.1043C11.7291 20.6851 9.6294 20.6154 7.70775 19.9054L7.36119 20.8435C9.48512 21.6281 11.8058 21.7052 13.9771 21.0632L13.6936 20.1043ZM7.70775 19.9054C5.7861 19.1955 4.14542 17.8834 3.03041 16.1648L2.19151 16.7091C3.42389 18.6086 5.23727 20.0588 7.36119 20.8435L7.70775 19.9054ZM3.03041 16.1648C1.9154 14.4462 1.3858 12.4132 1.52059 10.3691L0.52276 10.3033C0.37378 12.5626 0.959129 14.8096 2.19151 16.7091L3.03041 16.1648ZM1.52059 10.3691C1.65538 8.32491 2.44735 6.37909 3.77837 4.8218L3.01819 4.17208C1.54707 5.89329 0.67174 8.04394 0.52276 10.3033L1.52059 10.3691ZM3.77837 4.8218C5.10939 3.26451 6.90815 2.17919 8.90638 1.72772L8.686 0.752304C6.47742 1.2513 4.48932 2.45086 3.01819 4.17208L3.77837 4.8218ZM8.90638 1.72772C10.9046 1.27624 12.9953 1.4828 14.8665 2.31658L15.2735 1.40315C13.2053 0.481604 10.8946 0.253305 8.686 0.752304L8.90638 1.72772ZM20.6463 2.64649L10.6463 12.6565L11.3537 13.3632L21.3537 3.35324L20.6463 2.64649ZM11.3536 12.6563L8.35356 9.65631L7.64645 10.3634L10.6465 13.3634L11.3536 12.6563Z" fill="#009e32"></path>
+                </svg>
+                You've added <b>{{ product.title }}</b></span
+              >
+            </div>
+
+            <div class="product-set-price-btn">
+              <div class="nws-buy-btn-wrapper">
+                <button class="modal-close nws-modal-toggle nws-close-btn">No Thanks</button>
+                {%-
+                  render 'addons-btn',
+                  popup_selling_plan:true,
+                  block: block,
+                  product: prd,  # Pass the prd (setproduct) instead of the original product
+                  product_form_id: 'product-form-' | append: section.id,  # Modify this as needed
+                  section_id: section.id,
+                  show_pickup_availability: true
+                -%}
+              </div>
+            </div>
+            {% if section.settings['add-dis'] %}
+              <p class="nws-saving-text">You're saving {{ section.settings['add-dis'] }} with this offer</p>
+            {% endif %}
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% if settings['enable-pop'] != blank %}
+  <script>
+      $('.nws-fake-btn, .nws-modal-toggle').on('click', function(e) {
+       $('.nws-modal').toggleClass('is-visible');
+    });
+
+     $('.nws-modal-wrapper .nws-buy-btn-wrapper .nws-close-btn, .nws-close').on('click',function() {
+
+
+       $(".nws-cart-btn").click();
+
+        $('.nws-modal').removeClass('is-visible');
+    });
+
+       $('.other-btn').on('click',function() {
+      $('.nws-fake-btn').hide();
+       $('.nws-cart-btn').show();
+
+       setTimeout(function() {
+          $(".nws-cart-btn").click();
+      }, 500);
+         $('.nws-modal').removeClass('is-visible');
+       });
+  </script>
+{% endif %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
